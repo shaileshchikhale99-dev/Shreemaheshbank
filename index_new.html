@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Rates & Calculator - Mahesh Bank Nashik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'egyptian-blue': '#2D3091',
+                        'fire-engine-red': '#D41D15',
+                        'eerie-black': '#171717',
+                        'soft-gray': '#f3f4f6',
+                        'dark-text': '#333333',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #333333;
+        }
+        .section-header {
+            color: #D41D15;
+            font-weight: 700;
+        }
+        .btn-primary {
+            background-color: #2D3091;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #171717;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .input-group label {
+            font-weight: 600;
+            color: #2D3091;
+        }
+        .input-group input {
+            border: 2px solid #D41D15;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #2D3091;
+            box-shadow: 0 0 0 3px rgba(45, 48, 145, 0.3);
+        }
+        .loan-calculator-card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        #message-box {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .auth-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-soft-gray text-dark-text">
+    <!-- Custom Message Box -->
+    <div id="message-box" class="fixed z-50 hidden bg-white rounded-lg shadow-xl p-6 w-96 max-w-full">
+        <h3 id="message-title" class="text-xl font-bold mb-4"></h3>
+        <p id="message-body" class="mb-6"></p>
+        <button id="message-ok-btn" class="btn-primary w-full">OK</button>
+    </div>
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Header Section -->
+    <header class="bg-white py-4 shadow-lg w-full">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
+            <div class="flex items-center space-x-4">
+                <img src="https://placehold.co/60x60/D41D15/171717?text=MB" alt="Mahesh Bank Logo" class="rounded-full">
+                <h1 class="text-2xl font-bold text-eerie-black">Mahesh Bank Nashik</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-eerie-black hover:text-fire-engine-red transition-colors duration-300">Home</a>
+                <a href="#about-us" class="text-eerie-black hover:text-fire-engine-red transition-colors duration-300">About Us</a>
+                <a href="#" class="text-eerie-black hover:text-fire-engine-red transition-colors duration-300">Directors</a>
+                <a href="#" class="text-fire-engine-red font-semibold transition-colors duration-300">Loan Rates</a>
+                <a href="#" class="text-eerie-black hover:text-fire-engine-red transition-colors duration-300">Annual Reports</a>
+                <a href="#rates" class="text-eerie-black hover:text-fire-engine-red transition-colors duration-300">FD Rates</a>
+                <a href="#dormant-accounts" class="text-eerie-black hover:text-fire-engine-red transition-colors duration-300">Dormant Accounts</a>
+                <a href="#testimonials" class="text-eerie-black hover:text-fire-engine-red transition-colors duration-300">Testimonials</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden text-eerie-black focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white text-center py-2">
+            <a href="index.html" class="block py-2 text-eerie-black hover:bg-gray-100 hover:text-fire-engine-red transition-colors duration-300">Home</a>
+            <a href="#about-us" class="block py-2 text-eerie-black hover:bg-gray-100 hover:text-fire-engine-red transition-colors duration-300">About Us</a>
+            <a href="#" class="block py-2 text-eerie-black hover:bg-gray-100 hover:text-fire-engine-red transition-colors duration-300">Directors</a>
+            <a href="#" class="block py-2 text-fire-engine-red font-semibold hover:bg-gray-100 transition-colors duration-300">Loan Rates</a>
+            <a href="#" class="block py-2 text-eerie-black hover:bg-gray-100 hover:text-fire-engine-red transition-colors duration-300">Annual Reports</a>
+            <a href="#rates" class="block py-2 text-eerie-black hover:bg-gray-100 hover:text-fire-engine-red transition-colors duration-300">FD Rates</a>
+            <a href="#dormant-accounts" class="block py-2 text-eerie-black hover:text-fire-engine-red transition-colors duration-300">Dormant Accounts</a>
+            <a href="#testimonials" class="block py-2 text-eerie-black hover:bg-gray-100 transition-colors duration-300">Testimonials</a>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto mt-8 px-4 space-y-8 max-w-4xl">
+
+        
+        
+        <!-- Dormant Accounts Section -->
+        <section id="dormant-accounts" class="loan-calculator-card">
+            <h3 class="text-2xl font-bold text-center mb-4 text-egyptian-blue">Dormant and Inoperative Accounts</h3>
+            <p class="text-center mb-4 text-sm text-gray-600">
+                Search for dormant accounts by name, address, or account number.
+            </p>
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 items-center mb-6">
+                <div class="input-group flex-1 w-full">
+                    <label for="dormant-search" class="sr-only">Search</label>
+                    <input type="text" id="dormant-search" placeholder="e.g., 'Anil Kumar' or '123456789'" class="text-eerie-black">
+                </div>
+                <button id="search-dormant-btn" class="btn-primary w-full md:w-auto">Search</button>
+            </div>
+            
+            <div id="dormant-list-container" class="hidden bg-gray-100 rounded-lg p-4 max-h-80 overflow-y-auto">
+                <p id="loading-message" class="text-center text-gray-500 hidden">Loading...</p>
+                <p id="no-results-message" class="hidden text-center text-gray-500 mt-4">No matching accounts found.</p>
+                <div class="overflow-x-auto">
+                    <table id="dormant-table" class="min-w-full bg-white rounded-lg shadow-sm text-sm hidden">
+                        <thead>
+                            <tr class="bg-fire-engine-red text-white text-left">
+                                <th class="py-3 px-4 font-semibold">Account Holder</th>
+                                <th class="py-3 px-4 font-semibold">Account No.</th>
+                                <th class="py-3 px-4 font-semibold">Address</th>
+                                <th class="py-3 px-4 font-semibold">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dormant-list">
+                            <!-- Table rows will be dynamically generated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-300 text-eerie-black py-12 px-4">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-6 gap-8">
+            <!-- Contact & Address Column -->
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="text-xl font-semibold mb-4">Contact & Address</h3>
+                <address class="not-italic text-sm">
+                    Mahesh Bank Nashik<br>
+                    Plot No. 123, Main Road<br>
+                    Nashik, Maharashtra - 422001<br>
+                    India<br>
+                    Phone: +91 12345 67890<br>
+                    Email: info@maheshbank.co.in
+                </address>
+            </div>
+            <!-- DICGC Info Column -->
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="text-xl font-semibold mb-4">DICGC Info</h3>
+                <p class="text-sm">
+                    Deposits with our bank are insured by the DICGC (Deposit Insurance and Credit Guarantee Corporation), a subsidiary of the Reserve Bank of India (RBI).
+                </p>
+                <p class="text-sm mt-2">
+                    Each depositor is insured up to ₹5,00,000 for both principal and interest amount held by them.
+                </p>
+            </div>
+            <!-- RBI License & Other Info Column -->
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="text-xl font-semibold mb-4">RBI License</h3>
+                <p class="text-sm">
+                    Licensed under Section 22(1) of the Banking Regulation Act, 1949, by the Reserve Bank of India.
+                </p>
+                <h3 class="text-xl font-semibold mt-6 mb-4">Other Information</h3>
+                <ul class="text-sm space-y-2">
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">Careers</a></li>
+                    <li><a href="#about-us" class="hover:text-fire-engine-red transition-colors duration-300">About Us</a></li>
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <!-- Annual Reports Column -->
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="text-xl font-semibold mb-4">Annual Reports</h3>
+                <ul class="text-sm space-y-2">
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">View All Annual Reports</a></li>
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">Annual Report 2024 (PDF)</a></li>
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">Annual Report 2023 (PDF)</a></li>
+                </ul>
+            </div>
+            <!-- Forms Column -->
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="text-xl font-semibold mb-4">Forms</h3>
+                <ul class="text-sm space-y-2">
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">Loan Application Form (PDF)</a></li>
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">Account Opening Form (PDF)</a></li>
+                    <li><a href="#" class="hover:text-fire-engine-red transition-colors duration-300">KYC Form (PDF)</a></li>
+                </ul>
+            </div>
+            <!-- Customer Redressal Column -->
+            <div class="col-span-1 md:col-span-2">
+                <h3 class="text-xl font-semibold mb-4">Customer Redressal</h3>
+                <p class="text-sm">
+                    For any queries, complaints, or grievances, please reach out to our customer support team.
+                </p>
+                <p class="text-sm mt-2">
+                    Contact us at: <a href="mailto:grievance@maheshbank.co.in" class="hover:text-fire-engine-red transition-colors duration-300">grievance@maheshbank.co.in</a>
+                </p>
+            </div>
+        </div>
+        <div class="mt-8 text-center text-sm">
+            <p>&copy; <?php echo date("Y"); ?> Mahesh Bank Nashik. All Rights Reserved.</p>
+            <p class="mt-2 text-sm">Follow us on social media: [Icons Placeholder]</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Custom message box function to replace alerts
+        function showMessageBox(title, body) {
+            document.getElementById('message-title').textContent = title;
+            document.getElementById('message-body').textContent = body;
+            document.getElementById('message-box').classList.remove('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
+        }
+
+        // Function to search and display dormant accounts by fetching from a PHP script
+        async function searchDormantAccounts() {
+            const searchTerm = document.getElementById('dormant-search').value;
+            const container = document.getElementById('dormant-list-container');
+            const table = document.getElementById('dormant-table');
+            const list = document.getElementById('dormant-list');
+            const loading = document.getElementById('loading-message');
+            const noResults = document.getElementById('no-results-message');
+
+            // Show loading state
+            container.classList.remove('hidden');
+            table.classList.add('hidden');
+            noResults.classList.add('hidden');
+            loading.classList.remove('hidden');
+            list.innerHTML = '';
+
+            try {
+                // Fetch data from the PHP script
+                const response = await fetch(`./get_dormant_accounts.php?q=${encodeURIComponent(searchTerm)}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const filteredAccounts = await response.json();
+
+                if (filteredAccounts.length > 0) {
+                    table.classList.remove('hidden');
+                    filteredAccounts.forEach(account => {
+                        const row = document.createElement('tr');
+                        row.className = 'border-b border-gray-200 hover:bg-gray-100 transition-colors duration-200';
+                        row.innerHTML = `
+                            <td class="py-3 px-4">${account.name}</td>
+                            <td class="py-3 px-4">${account.accountNumber}</td>
+                            <td class="py-3 px-4">${account.address}</td>
+                            <td class="py-3 px-4">${account.status}</td>
+                        `;
+                        list.appendChild(row);
+                    });
+                } else {
+                    noResults.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Failed to fetch dormant accounts:', error);
+                showMessageBox('Error', 'Failed to retrieve data. Please try again later.');
+            } finally {
+                loading.classList.add('hidden');
+            }
+        }
+
+        // Function to calculate and display EMI
+        function calculateEMI() {
+            const loanAmount = parseFloat(document.getElementById('loan-amount').value);
+            const interestRate = parseFloat(document.getElementById('interest-rate').value);
+            const loanTenure = parseFloat(document.getElementById('loan-tenure').value);
+
+            if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTenure) || loanAmount <= 0 || interestRate <= 0 || loanTenure <= 0) {
+                document.getElementById('emi-result').textContent = "Invalid Input";
+                return;
+            }
+
+            const monthlyRate = interestRate / (12 * 100);
+            const numPayments = loanTenure * 12;
+            const emi = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numPayments) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+            
+            if (isFinite(emi)) {
+                document.getElementById('emi-result').textContent = `₹ ${emi.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+            } else {
+                document.getElementById('emi-result').textContent = "Calculate";
+            }
+        }
+        
+        // Event Listeners
+        window.addEventListener('load', () => {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Search dormant accounts
+            document.getElementById('search-dormant-btn').addEventListener('click', searchDormantAccounts);
+
+            // Hide the custom message box
+            document.getElementById('message-ok-btn').addEventListener('click', () => {
+                document.getElementById('message-box').classList.add('hidden');
+                document.getElementById('overlay').classList.add('hidden');
+            });
+
+            // Calculate EMI on input change
+            const loanInputs = ['loan-amount', 'interest-rate', 'loan-tenure'];
+            loanInputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', calculateEMI);
+                }
+            });
+            calculateEMI(); // Initial calculation on load
+        });
+    </script>
+</body>
+</html>
