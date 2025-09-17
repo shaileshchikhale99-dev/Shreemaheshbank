@@ -5,8 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loan Rates & Calculator - Mahesh Bank Nashik</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+	<script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2e3+K4c6QhL6S5K4E6P/T1+kK7f1aFfD4F+c1v2D8E3c1N9K6D/L4R5K8Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+       <script src="https://cdn.tailwindcss.com"></script>
+     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .stats-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .stats-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .stats-card:hover .fa-solid {
+            animation: bounce-once 0.6s ease-in-out;
+        }
+        @keyframes bounce-once {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>	
+	<script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -126,7 +153,70 @@
     <!-- Main Content Container -->
     <main class="container mx-auto mt-8 px-4 space-y-8 max-w-4xl">
 
-        
+            <section id="numbers" class="py-20 bg-soft-gray">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 text-fire-engine-red">Let's Numbers Talk</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                            <i class="fa-solid fa-sack-dollar fa-2x text-emerald-500 mb-2"></i>
+                            <p id="deposits-count" class="text-4xl md:text-5xl font-extrabold">0</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Deposits (Cr)</p>
+                        </div>
+                    </div>
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                             <i class="fa-solid fa-hand-holding-dollar fa-2x text-orange-500 mb-2"></i>
+                            <p id="loans-count" class="text-4xl md:text-5xl font-extrabold">0</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Loans & Advances (Cr)</p>
+                        </div>
+                    </div>
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                             <i class="fa-solid fa-chart-line fa-2x text-emerald-500 mb-2"></i>
+                            <p id="share-capital-count" class="text-4xl md:text-5xl font-extrabold">0</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Share Capital (Cr)</p>
+                        </div>
+                    </div>
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                             <i class="fa-solid fa-users fa-2x text-orange-500 mb-2"></i>
+                            <p id="membership-count" class="text-4xl md:text-5xl font-extrabold">0</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Membership</p>
+                        </div>
+                    </div>
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                             <i class="fa-solid fa-briefcase fa-2x text-emerald-500 mb-2"></i>
+                            <p id="working-capital-count" class="text-4xl md:text-5xl font-extrabold">0</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Working Capital (Cr)</p>
+                        </div>
+                    </div>
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                             <i class="fa-solid fa-percent fa-2x text-orange-500 mb-2"></i>
+                            <p id="profit-count" class="text-4xl md:text-5xl font-extrabold">0</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Net Profit (Cr)</p>
+                        </div>
+                    </div>
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                             <i class="fa-solid fa-location-dot fa-2x text-emerald-500 mb-2"></i>
+                            <p id="branches-count" class="text-4xl md:text-5xl font-extrabold">0</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Branches</p>
+                        </div>
+                    </div>
+                    <div class="stats-card p-6 bg-white rounded-xl shadow-md flex flex-col items-center justify-center text-center">
+                        <div class="stats-card-content">
+                             <i class="fa-solid fa-shield-halved fa-2x text-orange-500 mb-2"></i>
+                            <p id="npa-count" class="text-4xl md:text-5xl font-extrabold">0%</p>
+                            <p class="text-base md:text-lg font-semibold mt-1">Net NPA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
         
         <!-- Dormant Accounts Section -->
         <section id="dormant-accounts" class="loan-calculator-card">
@@ -347,6 +437,62 @@
             });
             calculateEMI(); // Initial calculation on load
         });
+		
+		
+	
+    document.addEventListener('DOMContentLoaded', () => {
+        function animateValue(objId, end, duration, isDecimal) {
+            let startTimestamp = null;
+            const obj = document.getElementById(objId);
+            const start = parseFloat(obj.textContent) || 0;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentValue = start + progress * (end - start);
+                
+                if (isDecimal) {
+                    obj.textContent = currentValue.toFixed(2);
+                } else {
+                    obj.textContent = Math.round(currentValue);
+                }
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        const numbersSection = document.getElementById("numbers");
+        let hasAnimated = false;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+                    const metrics = [
+                        { id: "deposits-count", value: 1054.34, duration: 2500, isDecimal: true },
+                        { id: "loans-count", value: 484.09, duration: 2500, isDecimal: true },
+                        { id: "share-capital-count", value: 36.37, duration: 2500, isDecimal: true },
+                        { id: "membership-count", value: 5543, duration: 2500, isDecimal: false },
+                        { id: "working-capital-count", value: 1103.88, duration: 2500, isDecimal: true },
+                        { id: "profit-count", value: 3.93, duration: 2500, isDecimal: true },
+                        { id: "branches-count", value: 8, duration: 2500, isDecimal: false },
+                    ];
+
+                    metrics.forEach(metric => {
+                        animateValue(metric.id, metric.value, metric.duration, metric.isDecimal);
+                    });
+                    
+                    document.getElementById("npa-count").textContent = "0%";
+                }
+            });
+        });
+
+        observer.observe(numbersSection);
+    });
+    
+		
     </script>
 </body>
 </html>
